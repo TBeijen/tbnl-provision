@@ -1,0 +1,16 @@
+---
+- name: Set capability on caddy to bind to TCP port <1024
+  command: setcap cap_net_bind_service=+ep /usr/local/bin/caddy
+
+- name: Check if systemd is running
+  stat: path=/run/systemd/system
+  register: systemd
+
+- name: Update systemd Caddy service
+  template: 
+    src: caddy.service.j2
+    dest: /etc/systemd/system/caddy.service
+    mode: 0755
+  when: systemd.stat.exists
+  notify: Reload systemd service file
+

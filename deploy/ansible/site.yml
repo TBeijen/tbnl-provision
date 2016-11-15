@@ -3,14 +3,13 @@
   become: yes
   roles:
     - caddy
+    - caddy_mods
+  vars_files:
+    - group_vars/stages/{{ stage }}.yml 
   tasks:
     - name: Install packages
-      packages:
-        name: "{{ item }}"
-        state: present
-        with_items:
-          - hugo
-    - name: Set capability on caddy to bind to TCP port <1024
-      command: setcap cap_net_bind_service=+ep /usr/local/bin/caddy
-
-    #   - name: Install packages
+      apt:
+        pkg: "{{ item }}"
+        state: installed
+      with_items:
+        - hugo

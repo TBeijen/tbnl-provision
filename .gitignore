@@ -1,0 +1,4 @@
+.vagrant
+ansible.cfg
+*.inventory
+deploy/ansible/roles_external

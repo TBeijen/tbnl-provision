@@ -1,0 +1,16 @@
+---
+- hosts: web
+  become: yes
+  roles:
+    - caddy
+  tasks:
+    - name: Install packages
+      packages:
+        name: "{{ item }}"
+        state: present
+        with_items:
+          - hugo
+    - name: Set capability on caddy to bind to TCP port <1024
+      command: setcap cap_net_bind_service=+ep /usr/local/bin/caddy
+
+    #   - name: Install packages

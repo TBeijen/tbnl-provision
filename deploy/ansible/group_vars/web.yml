@@ -1,0 +1,8 @@
+---
+caddy_config: |
+  {{ caddy_site_domain }} {
+    gzip
+    root /var/html/tbnl/
+    git github.com/TBeijen/tbnl-hugo/tree/master
+    tls {{ caddy_email }}
+  }

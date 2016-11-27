@@ -59,15 +59,15 @@
 - name: Create Caddyfile
   copy: content="{{caddy_config}}" dest=/etc/caddy/Caddyfile owner={{ caddy_user }}
   notify: Restart Caddy
-  when: not caddy_config_template
+  when: not caddy_config_use_template
 
 - name: Create Caddyfile from template
   template: 
-    src: "{{ caddy_config_template }}"
+    src: Caddyfile.j2
     dest: /etc/caddy/Caddyfile 
     owner: "{{ caddy_user }}"
   notify: Restart Caddy
-  when: caddy_config_template
+  when: caddy_config_use_template
 
 - name: Check if systemd is running
   stat: path=/run/systemd/system

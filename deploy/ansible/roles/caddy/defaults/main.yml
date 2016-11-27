@@ -2,8 +2,12 @@
 # defaults file for caddy-ansible
 caddy_user: www-data
 caddy_home: /home/caddy
+caddy_user_shell: '/bin/false'
 caddy_features: git
 caddy_update: yes
+caddy_service_template: ''  # optional template file to use for caddy.service
+caddy_create_data_dirs: []
+caddy_config_template: ''  # optional template file to use instead of caddy_config
 caddy_config: |
   localhost:2020
   gzip

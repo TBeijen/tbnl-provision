@@ -2,8 +2,8 @@
 - hosts: web
   become: yes
   roles:
+    - common
     - caddy
-    - caddy_mods
   vars_files:
     - group_vars/stages/{{ stage }}.yml 
   tasks:

@@ -1,8 +1,20 @@
 ---
 caddy_config: |
-  {{ caddy_site_domain }} {
+  {{ caddy_site_domain }}{% if not caddy_lets_encrypt %}:80{% endif %}/anno2012 {
     gzip
-    root /var/html/tbnl/
-    git github.com/TBeijen/tbnl-hugo/tree/master
-    tls {{ caddy_email }}
+    root /var/html/anno2012
+  {% if caddy_lets_encrypt %}  tls {{ caddy_email }}{% endif %}
+  }
+
+  {{ caddy_site_domain }}{% if not caddy_lets_encrypt %}:80{% endif %} {
+    gzip
+    root /var/html/tbnl/public
+  {% if caddy_lets_encrypt %}  tls {{ caddy_email }}{% endif %}
+    git {
+      repo github.com/TBeijen/tbnl-hugo 
+      path ../source
+      branch master
+      then bash -c "git submodule update --init --recursive"
+      then hugo --destination=/var/html/tbnl/public
+    }
   }

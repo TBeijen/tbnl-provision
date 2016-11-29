@@ -1,14 +1,6 @@
 Vagrant.require_version ">= 1.8.0"
 
 Vagrant.configure("2") do |config|
-  config.ssh.insert_key = false
-  config.ssh.username = "ubuntu"
-  # config.ssh.password = "9a4ceb9b7c52a848bc7c970d"
-  config.ssh.private_key_path = "~/.vagrant.d/insecure_private_key"
-  # config.ssh.username = 'vagrant'
-  # config.ssh.password = 'vagrant'
-
-  # config.vm.box = "bento/ubuntu-16.04"
   config.vm.box = "ubuntu/xenial64"
 
   config.vm.define "tbnl-web-001" do |web| 
@@ -22,7 +14,8 @@ Vagrant.configure("2") do |config|
   
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "deploy/ansible/site.yml"
-    
+    ansible.ask_vault_pass = true
+
     ansible.host_vars = {
         "tbnl-web-001" => {
         },

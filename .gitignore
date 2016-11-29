@@ -2,3 +2,4 @@
 ansible.cfg
 *.inventory
 deploy/ansible/roles_external
+/deploy/ansible/*.retry

@@ -32,3 +32,16 @@
     name: docker
     state: started
     enabled: yes
+
+- name: Register current users
+  shell: awk -F':' '{ print $1}' /etc/passwd
+  changed_when: false
+  register: current_users
+
+- name: Add users to docker group
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  when: item in current_users.stdout_lines
+  with_items: "{{ docker_users }}"

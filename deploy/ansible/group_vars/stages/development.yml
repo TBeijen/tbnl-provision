@@ -2,4 +2,9 @@
 caddy_email: "tibobeijen+dev@gmail.com"
 caddy_site_domain: "www.dev.tibobeijen.nl"
 caddy_lets_encrypt: false
+
+docker_users:
+  - ubuntu
+  - www-data
+
 pushover_title: "www.dev.tibobeijen.nl"

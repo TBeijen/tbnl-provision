@@ -3,6 +3,7 @@
   become: yes
   roles:
     - common
+    - docker
     - caddy
   vars_files:
     - group_vars/stages/{{ stage }}.yml 

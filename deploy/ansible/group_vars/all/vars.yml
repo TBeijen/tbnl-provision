@@ -1,3 +1,5 @@
 # vault contains
 # - caddy_deploy_private_key
 # - webhook_secret
+# - pushover_user_key
+# - pushover_api_token

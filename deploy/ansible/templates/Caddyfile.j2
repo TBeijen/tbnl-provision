@@ -9,11 +9,12 @@
 {% if caddy_lets_encrypt %}  tls {{ caddy_email }}{% endif %}
   git {
     repo github.com/TBeijen/tbnl-hugo 
-    hook /webhook
-    hook_type github {{ webhook_secret }}
+    hook /webhook {{ webhook_secret }}
+    hook_type github
     path ../source
     branch master
     then bash -c "git submodule update --init --recursive"
     then hugo --destination=/var/html/tbnl/public
+    then {{ caddy_home }}/pushover "Site pulled from GitHub"
   }
 }

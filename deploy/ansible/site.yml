@@ -5,6 +5,7 @@
     - common
     - caddy
     - docker
+    - docker_apps
   vars_files:
     - group_vars/stages/{{ stage }}.yml 
   tasks:

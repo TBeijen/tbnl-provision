@@ -1,9 +1,6 @@
-{{ caddy_site_domain }}{% if not caddy_lets_encrypt %}:80{% endif %}/anno2012 {
-  gzip
-  root /var/html/anno2012
-{% if caddy_lets_encrypt %}  tls {{ caddy_email }}{% endif %}
-}
 {{ caddy_site_domain }}{% if not caddy_lets_encrypt %}:80{% endif %} {
+  proxy /anno2003 localhost:8080 {
+  }
   gzip
   root /var/html/tbnl/public
 {% if caddy_lets_encrypt %}  tls {{ caddy_email }}{% endif %}

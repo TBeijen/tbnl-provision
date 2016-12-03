@@ -1,0 +1,11 @@
+---
+# handlers file for docker apps
+- name: Restart docker_tbnl_2003
+  service: 
+    name: docker_tbnl_2003 
+    state: restarted
+
+- name: Reload systemd service file
+  command: systemctl daemon-reload
+  notify: Restart docker_tbnl_2003
+  ignore_errors: yes

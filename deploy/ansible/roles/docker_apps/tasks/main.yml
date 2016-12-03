@@ -26,3 +26,17 @@
     name: tbnl_2003
     path: "{{ caddy_home }}/docker_apps/tbnl_2003"
     state: present
+  notify: Restart docker_tbnl_2003
+
+- name: Add docker tbnl_2003 service
+  template:
+    src: docker_tbnl_2003.service.j2
+    dest: /etc/systemd/system/docker_tbnl_2003.service 
+    mode: 0755
+  notify: Reload systemd service file
+
+- name: Start and enable docker_tbnl_2003 service
+  service:
+    name: docker_tbnl_2003
+    enabled: yes
+    state: started

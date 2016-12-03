@@ -11,7 +11,7 @@
     path ../source
     branch master
     then bash -c "git submodule update --init --recursive"
-    then hugo --destination=/var/html/tbnl/public
+    then hugo -b http{% if caddy_lets_encrypt %}s{% endif %}://{{ caddy_site_domain }}/ --destination=/var/html/tbnl/public
     then {{ caddy_home }}/pushover "Site pulled from GitHub"
   }
 }

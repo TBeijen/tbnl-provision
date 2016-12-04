@@ -26,6 +26,7 @@
     name: tbnl_2003
     path: "{{ caddy_home }}/docker_apps/tbnl_2003"
     state: present
+    force: yes
   notify: Restart docker_tbnl_2003
 
 - name: Add docker tbnl_2003 service

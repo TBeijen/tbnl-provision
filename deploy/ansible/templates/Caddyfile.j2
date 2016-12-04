@@ -3,7 +3,8 @@
   }
   gzip
   root /var/html/tbnl/public
-{% if caddy_lets_encrypt %}  tls {{ caddy_email }}{% endif %}
+{% if caddy_lets_encrypt %}  tls {{ caddy_email }}
+{% endif %}
   git {
     repo github.com/TBeijen/tbnl-hugo 
     hook /webhook {{ webhook_secret }}

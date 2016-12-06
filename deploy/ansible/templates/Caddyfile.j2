@@ -21,6 +21,9 @@ tibobeijen.nl{% if not caddy_lets_encrypt %}:80{% endif %} {
   root /var/html/tbnl/public
 {% if caddy_lets_encrypt %}  tls {{ caddy_email }}
 {% endif %}
+  errors {
+  	404 404.html
+  }
   git {
     repo github.com/TBeijen/tbnl-hugo 
     hook /webhook {{ webhook_secret }}

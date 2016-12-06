@@ -1,3 +1,6 @@
+tibobeijen.nl{% if not caddy_lets_encrypt %}:80{% endif %} {
+  redir / {scheme}://{{ caddy_site_domain }}{uri} 302
+}
 {{ caddy_site_domain }}{% if not caddy_lets_encrypt %}:80{% endif %} {
   proxy /anno2003 localhost:8080 {
   }

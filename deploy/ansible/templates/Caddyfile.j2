@@ -1,9 +1,22 @@
+# redirect no subdomain to www
+#
 tibobeijen.nl{% if not caddy_lets_encrypt %}:80{% endif %} {
   redir / {scheme}://{{ caddy_site_domain }}{uri} 302
 }
-{{ caddy_site_domain }}{% if not caddy_lets_encrypt %}:80{% endif %} {
-  proxy /anno2003 localhost:8080 {
+
+# handle /anno2003/
+#
+{{ caddy_site_domain }}{% if not caddy_lets_encrypt %}:80{% endif %}/anno2003/ {
+  proxy / localhost:8080 {
+    transparent
   }
+}
+
+# main site
+#
+{{ caddy_site_domain }}{% if not caddy_lets_encrypt %}:80{% endif %} {
+  # make sure /anno2003/ always has trailing slash
+  redir /anno2003 /anno2003/ 302
   gzip
   root /var/html/tbnl/public
 {% if caddy_lets_encrypt %}  tls {{ caddy_email }}
@@ -16,6 +29,6 @@ tibobeijen.nl{% if not caddy_lets_encrypt %}:80{% endif %} {
     branch master
     then bash -c "git submodule update --init --recursive"
     then hugo -b http{% if caddy_lets_encrypt %}s{% endif %}://{{ caddy_site_domain }}/ --destination=/var/html/tbnl/public
-    then {{ caddy_home }}/pushover "Site pulled from GitHub"
+    then {{ caddy_home }}/pushover "Site updated"
   }
 }

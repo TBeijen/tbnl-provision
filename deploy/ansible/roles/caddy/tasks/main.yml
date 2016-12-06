@@ -112,3 +112,11 @@
 
 - name: Start Caddy service
   service: name=caddy state=started enabled=yes
+
+- name: Allow ufw ports 80 and 443
+  ufw: 
+    rule: allow 
+    port: "{{ item }}"
+  with_items:
+    - 80
+    - 443

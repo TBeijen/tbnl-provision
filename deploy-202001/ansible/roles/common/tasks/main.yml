@@ -1,0 +1,15 @@
+---
+- name: Configure ssh to not hash known ssh_known_hosts
+  lineinfile:
+    dest: /etc/ssh/ssh_config
+    regexp: '^\s+HashKnownHosts'
+    line: "    HashKnownHosts no"
+  notify: Reload ssh
+
+- name: Ensure github.com is a known host
+  lineinfile:
+    dest: /etc/ssh/ssh_known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"

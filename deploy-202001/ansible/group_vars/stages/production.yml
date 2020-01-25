@@ -1,0 +1,10 @@
+---
+# caddy_email: tibobeijen@gmail.com
+# caddy_site_domain: "www.tibobeijen.nl"
+# caddy_lets_encrypt: true
+
+# docker_users:
+#   - www-data
+#   - t.beijen
+
+# pushover_title: "www.tibobeijen.nl"

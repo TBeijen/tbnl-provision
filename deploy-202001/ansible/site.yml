@@ -1,0 +1,7 @@
+---
+- hosts: web
+  become: yes
+  roles:
+    - common
+  vars_files:
+    - group_vars/stages/{{ stage }}.yml 

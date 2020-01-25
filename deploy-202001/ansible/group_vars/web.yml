@@ -1,0 +1,8 @@
+---
+# caddy_user_shell: /bin/bash
+# caddy_service_template: caddy.service.j2
+# caddy_update: no
+# caddy_create_data_dirs:
+#   - /var/html/tbnl
+#   - /var/html/tbnl/public
+# caddy_config_use_template: yes

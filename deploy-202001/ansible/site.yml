@@ -3,5 +3,6 @@
   become: yes
   roles:
     - common
+    - binaries
   vars_files:
     - group_vars/stages/{{ stage }}.yml 

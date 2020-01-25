@@ -1,0 +1,2 @@
+- include: download.yml
+  with_items: "{{ binaries_list }}"

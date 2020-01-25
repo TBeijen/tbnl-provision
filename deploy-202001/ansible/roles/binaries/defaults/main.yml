@@ -1,0 +1,8 @@
+binaries_list:
+  - url: https://github.com/gohugoio/hugo/releases/download/v0.63.1/hugo_0.63.1_Linux-64bit.tar.gz
+    archive_src: hugo
+    dest: /usr/local/bin/hugo-0.63.1
+    mode: '0755'
+  - url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.13/caddy2_beta13_linux_amd64
+    dest: /usr/local/bin/caddy2-b13
+    mode: '0755'

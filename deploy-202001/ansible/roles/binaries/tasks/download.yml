@@ -1,0 +1,69 @@
+---
+- name: Check if dest exists
+  stat:
+    path: "{{ item.dest }}"
+  register: result
+
+# Steps for downloading archive, unpacking and copying file to dest
+- name: Create tmp dir for archive
+  tempfile:
+    state: directory
+    suffix: temp
+  register: tempdir_1
+  when: result.stat.exists == false and item.archive_src is defined
+
+- name: Download and unarchive into tmp dir
+  unarchive:
+    src: "{{ item.url }}"
+    dest: "{{ tempdir_1.path }}"
+    remote_src: yes
+  when: result.stat.exists == false and item.archive_src is defined
+  
+- name: Copy archive_src to dest
+  copy:
+    src: "{{ tempdir_1.path }}/{{ item.archive_src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+    remote_src: yes
+  when: result.stat.exists == false and item.archive_src is defined
+
+- name: Download src directly to dest
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  when: result.stat.exists == false and item.archive_src is not defined
+
+
+
+# - name: Unarchive a file that needs to be downloaded (added in 2.0)
+#   unarchive:
+#     src: https://example.com/example.zip
+#     dest: /usr/local/bin
+#     remote_src: yes
+
+# - name: Download
+#   get_url:
+#     url: "{{ item.url }}"
+#     dest: /etc/foo.conf
+#     mode: '0440'
+
+#   when: result.stat.exists == false
+
+
+
+#     tempfile:
+#     state: directory
+#     suffix: build
+
+# - name: create temporary directory
+#   tempfile:
+#     state: directory
+#     suffix: temp
+#   register: tempdir_1
+
+# - name: use the registered var and the file module to remove the temporary file
+#   file:
+#     path: "{{ tempfile_1.path }}"
+#     state: absent
+#   when: tempfile_1.path is defined

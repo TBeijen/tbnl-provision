@@ -1,0 +1,4 @@
+---
+- name: unattended-upgrades
+  src: jnv.unattended-upgrades
+  version: v1.7.1

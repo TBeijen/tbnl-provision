@@ -1,5 +1,6 @@
 .vagrant
+.python-version
 ansible.cfg
 *.inventory
-deploy/ansible/roles_external
+*/ansible/roles_external
 /deploy/ansible/*.retry

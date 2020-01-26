@@ -6,5 +6,6 @@
     # https://github.com/jnv/ansible-role-unattended-upgrades
     - unattended-upgrades
     - binaries
+    - docker-ce
   vars_files:
     - group_vars/stages/{{ stage }}.yml 

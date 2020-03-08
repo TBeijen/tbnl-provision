@@ -2,3 +2,6 @@
 - name: unattended-upgrades
   src: jnv.unattended-upgrades
   version: v1.7.1
+- name: caddy_ansible
+  src: caddy_ansible.caddy_ansible
+  version: v2.1.1

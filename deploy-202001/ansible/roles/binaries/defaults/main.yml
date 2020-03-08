@@ -3,6 +3,14 @@ binaries_list:
     archive_src: hugo
     dest: /usr/local/bin/hugo-0.63.1
     mode: '0755'
-  - url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.13/caddy2_beta13_linux_amd64
-    dest: /usr/local/bin/caddy2-b13
-    mode: '0755'
+  # - url: https://github.com/caddyserver/caddy/releases/download/v1.0.3/caddy_v1.0.3_linux_amd64.tar.gz
+  #   archive_src: caddy
+  #   dest: /usr/local/bin/caddy-1.0.3
+  #   mode: '0755'
+  # - url: https://caddyserver.com/download/linux/amd64?plugins=http.git,http.ipfilter&license=personal&telemetry=off
+  #   archive_src: caddy
+  #   dest: /usr/local/bin/caddy-1-latest
+  #   mode: '0755'
+  # - url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.13/caddy2_beta13_linux_amd64
+  #   dest: /usr/local/bin/caddy2-b13
+  #   mode: '0755'

@@ -12,6 +12,23 @@
   register: tempdir_1
   when: result.stat.exists == false and item.archive_src is defined
 
+# # url is archive. Download, unpack, copy src to target location
+# - name: Download into tmp dir
+#   get_url:
+#     url: "{{ item.url }}"
+#     dest: "{{ tempdir_1.path }}/downloaded_file"
+#     timeout: 300  # long timeout for ad-hoc compiled caddy
+#   when: result.stat.exists == false and item.archive_src is defined
+
+
+
+# - name: Unpack tmp download
+#   unarchive:
+#     src: "{{ tempdir_1.path }}/downloaded_file"
+#     dest: "{{ tempdir_1.path }}"
+#     timeout: 300  # long timeout for ad-hoc compiled caddy
+#   when: result.stat.exists == false and item.archive_src is defined
+
 - name: Download and unarchive into tmp dir
   unarchive:
     src: "{{ item.url }}"
@@ -27,6 +44,8 @@
     remote_src: yes
   when: result.stat.exists == false and item.archive_src is defined
 
+
+# url is binary, download directly to target location
 - name: Download src directly to dest
   get_url:
     url: "{{ item.url }}"

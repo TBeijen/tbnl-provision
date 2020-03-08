@@ -1,0 +1,14 @@
+---
+- name: Create web user
+  user: 
+    name: web
+    system: yes 
+    createhome: yes 
+    home: /home/web
+    shell: /bin/bash
+
+- name: Add web user to docker group
+  user:
+    name: web
+    groups: docker
+    append: yes

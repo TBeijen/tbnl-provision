@@ -2,10 +2,18 @@
 - hosts: web
   become: yes
   roles:
-    - common
+    # - common
     # https://github.com/jnv/ansible-role-unattended-upgrades
-    - unattended-upgrades
+    # - unattended-upgrades
     - binaries
-    - docker-ce
+    # - docker-ce
+    # - users
   vars_files:
     - group_vars/stages/{{ stage }}.yml 
+
+
+
+
+# @TODO 
+# https://caddyserver.com/download/darwin/amd64?plugins=http.git,http.ipfilter&license=personal&telemetry=off
+

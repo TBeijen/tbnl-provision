@@ -9,3 +9,14 @@
 
 # pushover_title: "www.tibobeijen.nl"
 
+caddy_config: "{{ lookup('template', 'templates/Caddyfile.j2') }}"
+caddy_features: http.git,http.ipfilter
+caddy_setcap: yes
+caddy_http2_enabled: no
+caddy_systemd_capabilities_enabled: yes
+caddy_update: no
+
+site_domain: www.tibobeijen.nl
+test_site_domain: www-test.tibobeijen.nl
+
+pushover_title: "www.tibobeijen.nl (2)"

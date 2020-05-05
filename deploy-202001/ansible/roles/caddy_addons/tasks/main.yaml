@@ -1,0 +1,13 @@
+- name: Create pushover script
+  template:
+    src: pushover.j2
+    dest: "{{ caddy_home }}/pushover"
+    mode: 0711
+    owner: "{{ caddy_user }}"
+
+- name: Allow port 80 from Cloudflare
+  ufw:
+    rule: allow
+    port: "80"
+    src: "{{ item }}"
+  loop: "{{ cloudflare_ips }}"

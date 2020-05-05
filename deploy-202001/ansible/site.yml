@@ -6,7 +6,10 @@
     # https://github.com/jnv/ansible-role-unattended-upgrades
     # - unattended-upgrades
     - binaries
-    # - docker-ce
+    - caddy_ansible
+    - caddy_addons
+    - docker-ce
+    - docker-apps
     # - users
   vars_files:
     - group_vars/stages/{{ stage }}.yml 

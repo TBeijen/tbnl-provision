@@ -1,0 +1,70 @@
+# redirect no subdomain to www
+#
+tibobeijen.nl:80 {
+  tls off
+  redir / {scheme}://{{ site_domain }}{uri} 302
+}
+
+# handle /anno2003/
+#
+{{ site_domain }}:80/anno2003/ {
+  tls off
+  log stdout
+  proxy / localhost:8080 {
+    transparent
+  }
+}
+
+# main (production) site
+#
+{{ site_domain }}:80 {
+  tls off
+  # make sure /anno2003/ always has trailing slash
+  redir /anno2003 /anno2003/ 302
+  gzip
+  root /home/caddy/tbnl/public
+  header / cache-control "max-age=60"
+  log stdout
+
+  errors {
+  	404 404.html
+  }
+
+  git {
+    repo github.com/TBeijen/tbnl-hugo 
+    hook /webhook {{ webhook_secret }}
+    hook_type github
+    path /home/caddy/tbnl/source
+    branch feature/hugo_update
+    then bash -c "git submodule update --init --recursive"
+    then hugo-0.63.1 -e production --destination=/home/caddy/tbnl/public
+    then {{ caddy_home }}/pushover "Production site updated"
+  }
+}
+
+# test site
+#
+{{ test_site_domain }}:80 {
+  tls off
+  # make sure /anno2003/ always has trailing slash
+  redir /anno2003 /anno2003/ 302
+  gzip
+  root /home/caddy/tbnl-test/public
+  header / cache-control "max-age=60"
+  log stdout
+
+  errors {
+  	404 404.html
+  }
+
+  git {
+    repo github.com/TBeijen/tbnl-hugo 
+    hook /webhook {{ webhook_secret }}
+    hook_type github
+    path /home/caddy/tbnl-test/source
+    branch feature/hugo_update
+    then bash -c "git submodule update --init --recursive"
+    then hugo-0.63.1 -e test --destination=/home/caddy/tbnl-test/public
+    then {{ caddy_home }}/pushover "Test site updated"
+  }
+}

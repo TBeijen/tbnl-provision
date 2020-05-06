@@ -10,7 +10,7 @@
     - caddy_addons
     - docker-ce
     - docker-apps
-    # - users
+    - users
   vars_files:
     - group_vars/stages/{{ stage }}.yml 
 

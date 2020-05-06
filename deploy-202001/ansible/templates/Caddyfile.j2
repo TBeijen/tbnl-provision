@@ -9,7 +9,7 @@ tibobeijen.nl:80 {
 #
 {{ site_domain }}:80/anno2003/ {
   tls off
-  log stdout
+  log / stdout "{common} - {host}"
   proxy / localhost:8080 {
     transparent
   }
@@ -24,7 +24,7 @@ tibobeijen.nl:80 {
   gzip
   root /home/caddy/tbnl/public
   header / cache-control "max-age=60"
-  log stdout
+  log / stdout "{common} - {host}"
 
   errors {
   	404 404.html
@@ -51,7 +51,7 @@ tibobeijen.nl:80 {
   gzip
   root /home/caddy/tbnl-test/public
   header / cache-control "max-age=60"
-  log stdout
+  log / stdout "{common} - {host}"
 
   errors {
   	404 404.html
@@ -62,7 +62,7 @@ tibobeijen.nl:80 {
     hook /webhook {{ webhook_secret }}
     hook_type github
     path /home/caddy/tbnl-test/source
-    branch feature/hugo_update
+    branch develop
     then bash -c "git submodule update --init --recursive"
     then hugo-0.63.1 -e test --destination=/home/caddy/tbnl-test/public
     then {{ caddy_home }}/pushover "Test site updated"

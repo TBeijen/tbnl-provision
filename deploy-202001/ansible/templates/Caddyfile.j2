@@ -35,7 +35,7 @@ tibobeijen.nl:80 {
     hook /webhook {{ webhook_secret }}
     hook_type github
     path /home/caddy/tbnl/source
-    branch feature/hugo_update
+    branch develop
     then bash -c "git submodule update --init --recursive"
     then hugo-0.63.1 -e production --destination=/home/caddy/tbnl/public
     then {{ caddy_home }}/pushover "Production site updated"
@@ -62,7 +62,7 @@ tibobeijen.nl:80 {
     hook /webhook {{ webhook_secret }}
     hook_type github
     path /home/caddy/tbnl-test/source
-    branch feature/hugo_update
+    branch develop
     then bash -c "git submodule update --init --recursive"
     then hugo-0.63.1 -e test --destination=/home/caddy/tbnl-test/public
     then {{ caddy_home }}/pushover "Test site updated"
